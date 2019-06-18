@@ -1,4 +1,3 @@
-
 // Business Logic for AddressBook ---------
 function AddressBook() {
   this.contacts = [],
@@ -39,13 +38,16 @@ AddressBook.prototype.deleteContact = function(id) {
 }
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber, emailAddress, physicalAddress) {
+function Address (workEmailAddress, personalEmailAddress) {
+  this.workEmailAddress = workEmailAddress,
+  this.personalEmailAddress = personalEmailAddress
+}
+  function Contact(firstName, lastName, phoneNumber, Address) {
   this.firstName = firstName,
   this.lastName = lastName,
   this.phoneNumber = phoneNumber,
-  this.emailAddress = emailAddress,
-  this.physicalAddress = physicalAddress
-}
+  this.Address = Address
+  }
 
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
@@ -69,8 +71,8 @@ function showContact(contactId) {
  $(".first-name").html(contact.firstName);
  $(".last-name").html(contact.lastName);
  $(".phone-number").html(contact.phoneNumber);
- $(".email-address").html(contact.emailAddress);
- $(".physical-address").html(contact.physicalAddress);
+ $(".work-email-address").html(contact.Address.workEmailAddress);
+ $(".personal-email-address").html(contact.Address.personalEmailAddress);
  var buttons = $("#buttons");
  buttons.empty();
  buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
@@ -91,22 +93,47 @@ function attachContactListeners() {
 
 $(document).ready(function() {
   attachContactListeners();
+
+  $("#emailBtn").click(function() {
+    if ($("#inlineCheckbox1").prop("checked") && $("#inlineCheckbox2").prop("checked") === true) {
+        $("#form-group2").show();
+        $("#form-group3").show();
+
+    } else if ($("#inlineCheckbox2").prop("checked") === true) {
+              $("#form-group3").show();
+
+      } else if ($("#inlineCheckbox1").prop("checked") === true) {
+               $("#form-group2").show();
+        }
+
+  })
+  // Contact.keys = Address;
+
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
     var inputtedFirstName = $("input#new-first-name").val();
     var inputtedLastName = $("input#new-last-name").val();
     var inputtedPhoneNumber = $("input#new-phone-number").val();
-    var inputtedEmailAddress = $("input#new-email-address").val();
-    var inputtedPhysicalAddress = $("input#new-physical-address").val();
+    var inputtedWorkEmailAddress = $("input#work-email-address").val();
+    var inputtedPersonalEmailAddress = $("input#personal-email-address").val();
+
     // The next three lines are new:
      $("input#new-first-name").val("");
      $("input#new-last-name").val("");
      $("input#new-phone-number").val("");
-     $("input#new-email-address").val("");
-     $("input#new-physical-address").val("");
-    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmailAddress, inputtedPhysicalAddress);
+     $("input#work-email-address").val("");
+     $("input#personal-email-address").val("");
+
+     var newAddress = new Address(inputtedWorkEmailAddress, inputtedPersonalEmailAddress);
+
+     var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, newAddress);
+     console.log($(".work-email-address"));
+
+    // console.log(Contact);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
     console.log(addressBook.contacts);
+
+
   })
 })

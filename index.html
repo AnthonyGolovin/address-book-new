@@ -28,18 +28,29 @@
               <label for="new-phone-number">Phone Number</label>
               <input type="text"  class="form-control" id="new-phone-number" value="123-445-5555">
             </div>
-
-            <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                  <label class="form-check-label" for="inlineCheckbox1">Add Work Email</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                  <label class="form-check-label" for="inlineCheckbox2">Add Personal Email</label>
+                </div>
+            <div id="form-group2">
               <label for="new-last-name">Work Email</label>
               <input type="text"  class="form-control" id="work-email-address" value="1234@msn.com">
             </div>
-            <div class="form-group">
+            <div id="form-group3">
               <label for="new-last-name">Personal Email</label>
               <input type="text"  class="form-control" id="personal-email-address" value="Address 123">
             </div>
-            <button type="submit" class="btn-primary">Add</button>
+            <button type="submit" class="btn-primary">Open Contact</button>
           </form>
-          <hr>
+          <br>
+              <div>
+                <button type="click" id="emailBtn" class="btn-primary">Add Selected Fields</button>
+              </div>
+        <div>
           <h2>Contacts:</h2>
           <ul id="contacts">
           </ul>

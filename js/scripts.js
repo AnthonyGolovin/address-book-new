@@ -94,6 +94,19 @@ function attachContactListeners() {
 $(document).ready(function() {
   attachContactListeners();
 
+  $("#emailBtn").click(function() {
+    if ($("#inlineCheckbox1").prop("checked") && $("#inlineCheckbox2").prop("checked") === true) {
+        $("#form-group2").show();
+        $("#form-group3").show();
+
+    } else if ($("#inlineCheckbox2").prop("checked") === true) {
+              $("#form-group3").show();
+
+      } else if ($("#inlineCheckbox1").prop("checked") === true) {
+               $("#form-group2").show();
+        }
+
+  })
   // Contact.keys = Address;
 
   $("form#new-contact").submit(function(event) {
@@ -115,12 +128,12 @@ $(document).ready(function() {
 
      var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, newAddress);
      console.log($(".work-email-address"));
-     alert();
-     alert($(".work-email-address"));
+
     // console.log(Contact);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
     console.log(addressBook.contacts);
+
 
   })
 })
